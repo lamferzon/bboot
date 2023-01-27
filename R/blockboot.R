@@ -30,7 +30,10 @@
 #'    one the statistics table.
 #'
 #' @export
-#' @importFrom dplyr "%>%"
+#'
+#' @import tictoc
+#' @import rlist
+#' @import purrr
 
 blockboot <- function(y, N, K = 1, L,
          l_gen = "poisson",
