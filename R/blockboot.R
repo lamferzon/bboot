@@ -219,19 +219,6 @@ blockboot <- function(y, N, K = 1, L,
     }
   }
 
-  if(!require(rlist)){
-    install.packages("rlist")
-    library(rlist)
-  }
-  if(!require(tictoc)){
-    install.packages("tictoc")
-    library(tictoc)
-  }
-  if(!require(purrr)){
-    install.packages("purrr")
-    library(purrr)
-  }
-
   if(trace){
     cat("\n")
     cat("Block bootstrap configuration:\n")
