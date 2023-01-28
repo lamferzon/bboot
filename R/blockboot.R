@@ -17,13 +17,13 @@
 #'    or \emph{constant}.
 #' @param indexes If it is TRUE, then \code{blockboot} returns
 #'    the indexes of the re-sampled data, otherwise their values.
-#' @param sort If it is TRUE, then \code{blockboot} returns simulations
+#' @param sort If it is TRUE, then it returns simulations
 #'    whose blocks are sorted by using the first index of each block,
 #'    otherwise it keeps the original order.
-#' @param summary If it is TRUE, then \code{blockboot} returns not only the
+#' @param summary If it is TRUE, then it returns not only the
 #'    simulations but also some statistics concerning each of them.
 #' @param trace If it is TRUE, then the chosen configuration of
-#'    \code{blockboot} is printed before starting the simulations.
+#'    the block bootstrap is printed before starting the simulations.
 #'
 #' @return A matrix contained the K simulations of length N or a list of 2
 #'    if \code{summary} = TRUE: as first element the simulations, as second
@@ -41,10 +41,6 @@ blockboot <- function(y, N, K = 1, L,
          sort = FALSE,
          summary = FALSE,
          trace = TRUE) {
-  # please install the following packages before executing "block_bootstrap":
-  # - rlist;
-  # - tictoc
-  # - purrr
 
   # internal function for the case N <= n
   bb_N_small <- function(y, N, K, L, l_gen, indexes, summary, sort){

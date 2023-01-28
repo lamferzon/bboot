@@ -23,15 +23,15 @@ or \emph{constant}.}
 \item{indexes}{If it is TRUE, then \code{blockboot} returns
 the indexes of the re-sampled data, otherwise their values.}
 
-\item{sort}{If it is TRUE, then \code{blockboot} returns simulations
+\item{sort}{If it is TRUE, then it returns simulations
 whose blocks are sorted by using the first index of each block,
 otherwise it keeps the original order.}
 
-\item{summary}{If it is TRUE, then \code{blockboot} returns not only the
+\item{summary}{If it is TRUE, then it returns not only the
 simulations but also some statistics concerning each of them.}
 
 \item{trace}{If it is TRUE, then the chosen configuration of
-\code{blockboot} is printed before starting the simulations.}
+the block bootstrap is printed before starting the simulations.}
 }
 \value{
 A matrix contained the K simulations of length N or a list of 2
