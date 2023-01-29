@@ -9,7 +9,8 @@
 #'      sort = FALSE, summary = FALSE, trace = TRUE)
 #'
 #' @param y Data to re-sample.
-#' @param N Length of each simulation.
+#' @param N Length of each simulation. If N is less or equal to the number
+#'    of data, then repeated indexes cannot occur.
 #' @param K Number of simulations.
 #' @param L Mean length of the blocks.
 #' @param l_gen Distribution of the length of the blocks. Four choices
@@ -26,8 +27,18 @@
 #'    the block bootstrap is printed before starting the simulations.
 #'
 #' @return A matrix contained the K simulations of length N or a list of 2
-#'    if \code{summary} = TRUE: as first element the simulations, as second
+#'    if \code{summary} is TRUE: as first element the simulations, as second
 #'    one the statistics table.
+#'
+#' @examples
+#' data(air)
+#' # default settings, N <= number of observations
+#' idx <- blockboot(air$Temperature, 1250, 2, 3)
+#' # user settings, N > number of observations
+#' outputs <- blockboot(air$Temperature, 3010, 2, 3, "uniform",
+#'                      indexes = FALSE, sort = TRUE, summary = TRUE)
+#' simulations <- outputs[[1]]
+#' summary <- outputs[[2]]
 #'
 #' @export
 #'

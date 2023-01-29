@@ -16,9 +16,9 @@ data(air)
 \description{
 The source dataset contains data concerning the concentrations of air
 pollutants, main weather and geographical variables and soil usage. Data
-are daily and concern Lombardia (Italy) in the period 2016-2020.
+are daily and concern Lombardia (Italy) in the period 2016-2021.
 This dataset is an extract from the original one; it contains temperature
-and PM 2.5 sampled by a Sondrio station.
+and PM 2.5 data sampled by a Sondrio station.
 }
 \examples{
 data(air)

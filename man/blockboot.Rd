@@ -10,7 +10,8 @@ blockboot(y, N, K = 1, L, l_gen = "poisson", indexes = TRUE,
 \arguments{
 \item{y}{Data to re-sample.}
 
-\item{N}{Length of each simulation.}
+\item{N}{Length of each simulation. If N is less or equal to the number
+of data, then repeated indexes cannot occur.}
 
 \item{K}{Number of simulations.}
 
@@ -35,7 +36,7 @@ the block bootstrap is printed before starting the simulations.}
 }
 \value{
 A matrix contained the K simulations of length N or a list of 2
-   if \code{summary} = TRUE: as first element the simulations, as second
+   if \code{summary} is TRUE: as first element the simulations, as second
    one the statistics table.
 }
 \description{
@@ -43,4 +44,15 @@ If data are correlated, then it is not possible to use
    a simple resampling due to its inability to replicate the
    correlation in the data. The block bootstrap tries to overcome
    this issue by resampling inside blocks of data.
+}
+\examples{
+data(air)
+# default settings, N <= number of observations
+idx <- blockboot(air$Temperature, 1250, 2, 3)
+# user settings, N > number of observations
+outputs <- blockboot(air$Temperature, 3010, 2, 3, "uniform",
+                     indexes = FALSE, sort = TRUE, summary = TRUE)
+simulations <- outputs[[1]]
+summary <- outputs[[2]]
+
 }
