@@ -42,9 +42,9 @@
 #'
 #' @export
 #'
-#' @import tictoc
-#' @import rlist
-#' @import purrr
+#' @importFrom tictoc tic toc
+#' @importFrom rlist list.search list.remove
+#' @importFrom purrr rdunif
 
 blockboot <- function(y, N, K = 1, L,
          l_gen = "poisson",
