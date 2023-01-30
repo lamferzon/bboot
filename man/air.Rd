@@ -5,7 +5,7 @@
 \alias{air}
 \title{Extract from AgrImOnIA dataset}
 \format{
-An object of class \emph{data frame}.
+An object of class \code{data.frame}.
 }
 \source{
 \href{https://zenodo.org/record/6620530#.Y1ZsD-xBz1I}{Agriculture Impact On Italian Air (AgrImOnIA) dataset}

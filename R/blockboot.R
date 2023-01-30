@@ -236,17 +236,24 @@ blockboot <- function(y, N, K = 1, L,
     stop('')
   }
 
+  #parameters checks
   if(N <= 0)
     stop('N has to be greater than 0')
   if(K <= 0)
     stop('K has to be greater than 0')
   if(L <= 0)
     stop('L has to be greater than 0')
+  if(L > length(y))
+    stop('L has to be less than length(y)')
   if(l_gen != "poisson" && l_gen != "geometric" && l_gen != "uniform" &&
      l_gen != "constant")
     stop('invalid chosen distribution')
-  if(l_gen == "constant" && length(y)%%L != 0)
-    warning('length(y)%%L != 0, therefore the last block will be cut')
+  if(l_gen == "constant" && length(y) == N)
+    warning("block length is constant and length(y) is equal to N, therefore convergence is not guarantee",
+            immediate. = TRUE)
+  if(l_gen == "constant" && N%%L != 0)
+    warning('remainder of N/L is non-zero, therefore the last block will be cut',
+            immediate. = TRUE)
 
   if(trace){
     cat("\n")

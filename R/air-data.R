@@ -10,7 +10,7 @@
 #'
 #' @usage data(air)
 #'
-#' @format An object of class \emph{data frame}.
+#' @format An object of class \code{data.frame}.
 #'
 #' @keywords dataset
 #'
