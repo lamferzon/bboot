@@ -1,7 +1,7 @@
 Package: bboot
 Type: Package
 Title: Easily Performing Block Bootstrap on Correlated Data
-Version: 0.1.0
+Version: 0.1.0.9000
 Author@R: c(
     person("Lorenzo", "Leoni", email = "lorenzo.leoni1998@gmail.com",
     role = c("cre", "aut")))
