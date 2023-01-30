@@ -45,6 +45,7 @@
 #' @importFrom tictoc tic toc
 #' @importFrom rlist list.search list.remove
 #' @importFrom purrr rdunif
+#' @importFrom rlang is_empty
 
 blockboot <- function(y, N, K = 1, L,
          l_gen = "poisson",
