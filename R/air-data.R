@@ -17,7 +17,6 @@
 #' @source \href{https://zenodo.org/record/6620530#.Y1ZsD-xBz1I}{Agriculture Impact On Italian Air (AgrImOnIA) dataset}
 #'
 #' @examples
-#' data(air)
 #' par(mgp = c(2,0.5,0), mar = c(4,4,1.5,4)+0.1)
 #' plot(air$Datetime, air$PM25,
 #'      type = "l",

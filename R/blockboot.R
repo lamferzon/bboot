@@ -6,7 +6,7 @@
 #'    this issue by resampling inside blocks of data.
 #'
 #' @usage blockboot(y, N, K = 1, L, l_gen = "poisson", indexes = TRUE,
-#'      sort = FALSE, summary = FALSE, trace = TRUE)
+#'      sort = FALSE, reject = TRUE, summary = FALSE, trace = TRUE)
 #'
 #' @param y Data to re-sample.
 #' @param N Length of each simulation. If N is less or equal to the number
@@ -21,6 +21,8 @@
 #' @param sort If it is TRUE, then it returns simulations
 #'    whose blocks are sorted by using the first index of each block,
 #'    otherwise it keeps the original order.
+#' @param reject Only for N greater than the number of data. If it is TRUE,
+#'    then blocks having the same first index cannot appear.
 #' @param summary If it is TRUE, then it returns not only the
 #'    simulations but also some statistics concerning each of them.
 #' @param trace If it is TRUE, then the chosen configuration of
@@ -31,12 +33,13 @@
 #'    one the statistics table.
 #'
 #' @examples
-#' data(air)
 #' # default settings, N <= number of observations
 #' idx <- blockboot(air$Temperature, 1250, 2, 3)
+#'
 #' # user settings, N > number of observations
 #' outputs <- blockboot(air$Temperature, 3010, 2, 3, "uniform",
-#'                      indexes = FALSE, sort = TRUE, summary = TRUE)
+#'                      indexes = FALSE, sort = TRUE, reject = FALSE,
+#'                      summary = TRUE)
 #' simulations <- outputs[[1]]
 #' summary <- outputs[[2]]
 #'
@@ -51,6 +54,7 @@ blockboot <- function(y, N, K = 1, L,
          l_gen = "poisson",
          indexes = TRUE,
          sort = FALSE,
+         reject = TRUE,
          summary = FALSE,
          trace = TRUE) {
 
@@ -59,7 +63,7 @@ blockboot <- function(y, N, K = 1, L,
     res_star <- matrix(nrow = N, ncol = K)
     colnames(res_star) <- paste("sim", 1:K, sep = "")
     analysis <- matrix(nrow = 6, ncol = K+1)
-    rownames(analysis) <- c("num. iterations", "num. blocks", "avg blocks' length",
+    rownames(analysis) <- c("num. iterations", "num. blocks", "mean blocks length",
                            "num. out-of-indexes", "num. rejected blocks",
                            "execution time (s)")
     colnames(analysis) <- c(paste("sim", 1:K, sep = ""), "avg")
@@ -141,11 +145,11 @@ blockboot <- function(y, N, K = 1, L,
   }
 
   #internal function for the case N > n
-  bb_N_big <- function(y, N, K, L, l_gen, indexes, summary, sort){
+  bb_N_big <- function(y, N, K, L, l_gen, indexes, summary, sort, reject){
     res_star <- matrix(nrow = N, ncol = K)
     colnames(res_star) <- paste("sim", 1:K, sep = "")
     analysis <- matrix(nrow = 6, ncol = K+1)
-    rownames(analysis) <- c("num. iterations", "num. blocks", "avg blocks' length",
+    rownames(analysis) <- c("num. iterations", "num. blocks", "mean blocks length",
                            "num. out-of-indexes", "num. rejected indexes",
                            "execution time (s)")
     colnames(analysis) <- c(paste("sim", 1:K, sep = ""), "avg")
@@ -182,9 +186,10 @@ blockboot <- function(y, N, K = 1, L,
           } else{
             names(block_list) <- block_list[[1]]
           }
-          if (is_empty(list.search(rej_idx, any(. == block[1])))){
+          if(is_empty(list.search(rej_idx, any(. == block[1])))){
             idx_star <- append(idx_star, block_list)
-            rej_idx <- append(rej_idx, block[1])
+            if(reject)
+              rej_idx <- append(rej_idx, block[1])
             blk <- blk + 1
             count <- count + length(block)
           } else{
@@ -195,9 +200,9 @@ blockboot <- function(y, N, K = 1, L,
         }
       }
       # sorting and unlist
-      if (sort == TRUE){
-        sorting <- sort(as.numeric(names(idx_star)))
-        idx_star <- unlist(idx_star[as.character(sorting)])
+      if(sort == TRUE){
+        sorting <- idx_star[order(as.numeric(names(idx_star)))]
+        idx_star <- unlist(sorting)
       } else{
         idx_star <- unlist(idx_star)
       }
@@ -227,6 +232,22 @@ blockboot <- function(y, N, K = 1, L,
     }
   }
 
+  if(length(y) <= 0){
+    stop('')
+  }
+
+  if(N <= 0)
+    stop('N has to be greater than 0')
+  if(K <= 0)
+    stop('K has to be greater than 0')
+  if(L <= 0)
+    stop('L has to be greater than 0')
+  if(l_gen != "poisson" && l_gen != "geometric" && l_gen != "uniform" &&
+     l_gen != "constant")
+    stop('invalid chosen distribution')
+  if(l_gen == "constant" && length(y)%%L != 0)
+    warning('length(y)%%L != 0, therefore the last block will be cut')
+
   if(trace){
     cat("\n")
     cat("Block bootstrap configuration:\n")
@@ -235,8 +256,9 @@ blockboot <- function(y, N, K = 1, L,
     cat(sprintf("- mean blocks length (L): %d\n", L))
     cat(sprintf("- blocks length distribution: %s\n", l_gen))
     cat(sprintf("- indixes: %s\n", indexes))
-    cat(sprintf("- summary: %s\n", summary))
     cat(sprintf("- sort: %s\n", sort))
+    cat(sprintf("- reject: %s\n", reject))
+    cat(sprintf("- summary: %s\n", summary))
     if(N <= length(y)){
       cat("- N <= n -> no ripetions\n")
     } else {
@@ -247,6 +269,6 @@ blockboot <- function(y, N, K = 1, L,
   if(N <= length(y)){
     return(bb_N_small(y, N, K, L, l_gen, indexes, summary, sort))
   } else {
-    return(bb_N_big(y, N, K, L, l_gen, indexes, summary, sort))
+    return(bb_N_big(y, N, K, L, l_gen, indexes, summary, sort, reject))
   }
 }

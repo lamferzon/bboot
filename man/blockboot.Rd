@@ -5,7 +5,7 @@
 \title{Block bootstrap}
 \usage{
 blockboot(y, N, K = 1, L, l_gen = "poisson", indexes = TRUE,
-     sort = FALSE, summary = FALSE, trace = TRUE)
+     sort = FALSE, reject = TRUE, summary = FALSE, trace = TRUE)
 }
 \arguments{
 \item{y}{Data to re-sample.}
@@ -28,6 +28,9 @@ the indexes of the re-sampled data, otherwise their values.}
 whose blocks are sorted by using the first index of each block,
 otherwise it keeps the original order.}
 
+\item{reject}{Only for N greater than the number of data. If it is TRUE,
+then blocks having the same first index cannot appear.}
+
 \item{summary}{If it is TRUE, then it returns not only the
 simulations but also some statistics concerning each of them.}
 
@@ -46,12 +49,13 @@ If data are correlated, then it is not possible to use
    this issue by resampling inside blocks of data.
 }
 \examples{
-data(air)
 # default settings, N <= number of observations
 idx <- blockboot(air$Temperature, 1250, 2, 3)
+
 # user settings, N > number of observations
 outputs <- blockboot(air$Temperature, 3010, 2, 3, "uniform",
-                     indexes = FALSE, sort = TRUE, summary = TRUE)
+                     indexes = FALSE, sort = TRUE, reject = FALSE,
+                     summary = TRUE)
 simulations <- outputs[[1]]
 summary <- outputs[[2]]
 

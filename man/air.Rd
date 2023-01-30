@@ -21,7 +21,6 @@ This dataset is an extract from the original one; it contains temperature
 and PM 2.5 data sampled by a Sondrio station.
 }
 \examples{
-data(air)
 par(mgp = c(2,0.5,0), mar = c(4,4,1.5,4)+0.1)
 plot(air$Datetime, air$PM25,
      type = "l",
