@@ -1,8 +1,10 @@
 
-# library(devtools)
+library(devtools)
 # install_github("lamferzon/block-bootstrap-for-R")
 library(bboot)
 library(latex2exp)
+library(hexSticker)
+library(showtext)
 rm(list = ls())
 
 # Simulations --------------------------------------------------------------
@@ -41,11 +43,10 @@ for (i in N_set){
   j <- j + 1
 }
 
-plot(res_table$length_pois)
 save(res_table, file = "C:/Users/loren/Desktop/bboot/forREADME/res_table.RData")
 
 # Results -----------------------------------------------------------------
-load("C:/Users/loren/Desktop/bboot/forREADME/res_table.RData")
+load("forREADME/res_table.RData")
 
 perc <- (res_table$N/length(air$Temperature))
 
@@ -114,3 +115,23 @@ mtext(TeX("Mean blocks length"),
       side = 4,
       line = 2,
       col = "green2")
+
+# Hexagon sticker ---------------------------------------------------------
+imgurl <- "forREADME/leo.png"
+font_add_google("Gochi Hand", "gochi")
+icon <- sticker(imgurl,
+                package = "bboot",
+                p_size = 26,
+                p_y = 1.53,
+                s_x = 1,
+                s_y = .82,
+                s_width =.55,
+                filename ="forREADME/logo.png",
+                h_fill = "beige",
+                h_color = "chocolate3",
+                p_color = "darkorange",
+                url = "https://github.com/lamferzon/block-bootstrap-for-R",
+                u_size = 3,
+                p_family = "gochi",
+                white_around_sticker = TRUE)
+
