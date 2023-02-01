@@ -54,11 +54,11 @@ perc <- (res_table$N/length(air$Temperature))
 par(mgp=c(2,0.5,0), mar=c(4,4,2,4)+0.1)
 plot(perc, res_table$time_pois,
      col = "darkorange",
-     xlab = TeX("Ratio N/n"),
+     xlab = TeX("N/n ratio"),
      ylab = "",
      ylim = c(0,110),
      lwd = 1.5)
-mtext(TeX("Execution time [s]"),
+mtext(TeX("Mean execution time [s]"),
       side = 2,
       line = 2,
       col = "darkorange")
@@ -87,11 +87,11 @@ mtext(TeX("Mean blocks length"),
 par(mgp=c(2,0.5,0), mar=c(4,4,2,4)+0.1)
 plot(perc, res_table$time_pois_rej,
      col = "darkorange",
-     xlab = TeX("Ratio N/n"),
+     xlab = TeX("N/n ratio"),
      ylab = "",
      ylim = c(0,110),
      lwd = 1.5)
-mtext(TeX("Execution time [s]"),
+mtext(TeX("Mean execution time [s]"),
       side = 2,
       line = 2,
       col = "darkorange")
