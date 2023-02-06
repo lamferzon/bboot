@@ -1,5 +1,11 @@
 # Block bootstrap for R <img src='forREADME/logo.png' align="right" height="145" />
 
+![GitHub top language](https://img.shields.io/github/languages/top/lamferzon/block-bootstrap-for-R?label=R&logo=R)
+![GitHub](https://img.shields.io/github/license/lamferzon/block-bootstrap-for-R?color=steelblue)
+![GitHub R package version](https://img.shields.io/github/r-package/v/lamferzon/block-bootstrap-for-R?color=lightskyblue)
+![GitHub repo size](https://img.shields.io/github/repo-size/lamferzon/block-bootstrap-for-R?color=red)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/lamferzon/block-bootstrap-for-R?color=orange)
+![GitHub last commit](https://img.shields.io/github/last-commit/lamferzon/block-bootstrap-for-R?color=yellow)
 [![codecov](https://codecov.io/gh/lamferzon/block-bootstrap-for-R/branch/main/graph/badge.svg?token=BS7OQ5ELIN)](https://codecov.io/gh/lamferzon/block-bootstrap-for-R)
 
 ## Author ##
