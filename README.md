@@ -8,6 +8,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/lamferzon/block-bootstrap-for-R?color=yellow)
 [![codecov](https://codecov.io/gh/lamferzon/block-bootstrap-for-R/branch/main/graph/badge.svg?token=BS7OQ5ELIN)](https://codecov.io/gh/lamferzon/block-bootstrap-for-R)
 ![GitHub forks](https://img.shields.io/github/forks/lamferzon/block-bootstrap-for-R?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/lamferzon/block-bootstrap-for-R?style=social)
 
 ## Author ##
 **Lorenzo LEONI**, postgraduate in Computer Engineering at University of Bergamo.
